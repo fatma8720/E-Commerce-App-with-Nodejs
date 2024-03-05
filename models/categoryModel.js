@@ -16,6 +16,11 @@ const categorySchema = new mongoose.Schema({
         lowercase : true,
 
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     image : String,
   },
   { timestamps: true }

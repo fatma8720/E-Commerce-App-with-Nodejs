@@ -44,6 +44,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
       phone: req.body.phone,
       email: req.body.email,
       role: req.body.role,
+      isVerified: req.body.isVerified,
     },
     {
       new: true,
@@ -60,7 +61,9 @@ exports.deactivateUser = asyncHandler(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(req.params.id, { active: false });
 
   if (!user) {
-    return next(new ApiError(`No user found for this id ${req.params.id}`, 404));
+    return next(
+      new ApiError(`No user found for this id ${req.params.id}`, 404)
+    );
   }
 
   res.status(204).json({ status: "Success" });
